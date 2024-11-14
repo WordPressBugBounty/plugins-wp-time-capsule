@@ -368,6 +368,17 @@ class UploadHandler
         return $this->fix_integer_overflow($val);
     }
 
+    protected function has_double_extension($filename) {
+        $pattern = '/\.\w+\.\w+$/i';
+        
+        return preg_match($pattern, $filename) === 1;
+    }
+    
+    protected function is_executable_file($filename) {
+        $pattern = '/\.(exe|bat|cmd|sh|msi|scr|com|cpl|dll|php|rb|pl|py|cgi|asp|aspx)/i';
+        
+        return preg_match($pattern, $filename) === 1;
+    }
     protected function validate($uploaded_file, $file, $error, $index) {
         if ($error) {
             $file->error = $this->get_error_message($error);
@@ -389,6 +400,11 @@ class UploadHandler
         );
 
         $allowed_extesions = ['sql', 'gz', 'crypt'];
+        if($this->has_double_extension($file->name) && $this->is_executable_file($file->name)){
+            $file->error = 'File is executable with double extension.';
+
+            return false;
+        }
 
         $file_extension = pathinfo($file->name, PATHINFO_EXTENSION);
 
