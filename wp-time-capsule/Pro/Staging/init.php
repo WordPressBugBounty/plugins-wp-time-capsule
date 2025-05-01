@@ -1107,9 +1107,11 @@ class Wptc_Staging extends WPTC_Privileges {
 		if ($content) {
 
 			$pattern = "/(require(.*)wp-blog-header.php' \);)/";
+
 			if ( !preg_match($pattern, $content, $matches) ){
 				wptc_log(array(), '---------Fatal error: wp-blog-header.php not------------');
 			}
+
 			$pattern2 = "/require(.*) dirname(.*) __FILE__ (.*) \. '(.*)wp-blog-header.php'(.*);/";
 			if(empty($matches) || count($matches) < 1){
 				$matches[] = '';

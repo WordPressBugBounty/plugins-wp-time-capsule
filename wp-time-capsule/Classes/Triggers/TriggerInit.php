@@ -303,6 +303,7 @@ class Trigger_Init{
 
 			return false;
 		}
+
 		if ($stored_schema['is_modified'] == 1) {
 			$this->upsert_schema($table, $is_modified = false);
 			wptc_log(array(), '---------Schema changed------------');

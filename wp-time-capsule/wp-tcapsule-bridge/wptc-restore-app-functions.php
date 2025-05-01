@@ -673,6 +673,7 @@ class WPTC_Restore_App_Functions {
 		}
 
 		$table_name_from_query = wptc_get_table_from_query($haystack);
+
 		if(empty($table_name_from_query)){
 			wptc_log($table_name_from_query, "--------table_name_from_query-empty---1----");
 			// wptc_log($haystack, "------tablename empty--query---1----");
@@ -710,7 +711,6 @@ class WPTC_Restore_App_Functions {
 				}
 			}
 		}
-
 
 		if( !empty($from) 
 			&& !empty($to) 
@@ -789,10 +789,12 @@ class WPTC_Restore_App_Functions {
 		}
 
 		// wptc_log($haystack, "--------haystack--------");
+
 		// $haystack = str_ireplace( array("\\\\\'", "\\\'", '\\\\"', '\\\"', '\\"'), array("\'", "\'", '"', '"', '"'), $haystack );
 		$haystack = str_ireplace( array("\\\\\'", "\\\'"), array("\'", "\'"), $haystack );
 
 		if (stripos($haystack, "insert into") !== false) {
+
 			$sub_str_haystack = substr($haystack, 0, 500);
 			$table_name_from_query = wptc_get_table_from_query($sub_str_haystack);
 
@@ -800,8 +802,10 @@ class WPTC_Restore_App_Functions {
 				wptc_log($table_name_from_query, "--------table_name_from_query-empty---2----");
 				wptc_log($haystack, "------tablename empty--query---2----");
 			}
+
 			if ($this->tempQueryCount > 0) {
 				if ($this->tempQueryCount > 200 || $this->tempQuerySize > 100000) {
+
 					// wptc_log($this->tempQueryCount, "--------tempquerycount big-------");
 
 					if(empty($table_name_from_query)){
@@ -809,10 +813,12 @@ class WPTC_Restore_App_Functions {
 					} else {
 						$sql = ",".$this->replaceInsertQuery($haystack, $table_name_from_query). ";  \n";
 					}
+
 					$retArray['q'] = $sql;
 					$retArray['exec'] = 1;
 					$this->resetTempQuery(-1);
 				} else {
+
 					// wptc_log('', "--------tempquerycount not big--------");
 
 					if(empty($table_name_from_query)){
@@ -824,6 +830,7 @@ class WPTC_Restore_App_Functions {
 					$retArray['q'] = $sql;
 				}
 			} else {
+
 				// wptc_log('', "--------tempquerycount 0--------");
 
 				if(empty($table_name_from_query)){

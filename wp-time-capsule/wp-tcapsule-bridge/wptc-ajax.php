@@ -1,4 +1,9 @@
 <?php
+
+if(stripos(__DIR__, 'wp-time-capsule/wp-tcapsule-bridge') != false){
+	die('Invalid request.');
+}
+
 #[AllowDynamicProperties]
 class WPTC_Restore_Download {
 

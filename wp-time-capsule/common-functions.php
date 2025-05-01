@@ -152,6 +152,7 @@ function wptc_fatal_error_hadler($return = null) {
 	if(!empty($last_error['type']) && $last_error['type'] == 8192){
 		return;
 	}
+
 	file_put_contents(WPTC_WP_CONTENT_DIR . '/wptc-logs.txt', $log_error_types[$last_error['type']] . ": " . $last_error['message'] . " in " . $last_error['file'] . " on " . " line " . $last_error['line'] . "\n", FILE_APPEND);
 
 	if (strpos($last_error['file'], 'wp-time-capsule') === false && strpos($last_error['file'], 'wp-tcapsule-bridge') === false) {

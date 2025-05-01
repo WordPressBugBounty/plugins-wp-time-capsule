@@ -80,6 +80,7 @@ class WPTC_BackupController {
 
 			return false;
 		}
+
 		global $wpdb;
 		$result = $wpdb->query('SET SESSION LOW_PRIORITY_UPDATES=ON');
 
@@ -184,6 +185,7 @@ class WPTC_BackupController {
 				}
 
 				if (!@is_readable($file)) {
+
 					wptc_log($file, '------file---not is_readable------------');
 
 					//Do not email anything inside wptc temp dir
@@ -198,7 +200,9 @@ class WPTC_BackupController {
 
 				//Cannot read filesize so skip this file
 				if (filesize($file) === false) {
+
 					wptc_log($file, '---------cannot read filesize------------');
+
 					continue;
 				}
 

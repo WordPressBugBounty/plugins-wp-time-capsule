@@ -208,6 +208,7 @@ class WPTC_File_Iterator{
 	private function insert_into_iterator_process($qry){
 		$sql = "INSERT into `" . $this->wpdb->base_prefix . "wptc_processed_iterator` ( `name`, `offset` ) values $qry ;";
 		$result = $this->wpdb->query($sql);
+
 		if($result === false){
 			wptc_log($sql, '--------insert_into_iterator_process--qry--sql----');
 			wptc_log($this->wpdb->last_error, '--------insert_into_iterator_process--qry--error----');

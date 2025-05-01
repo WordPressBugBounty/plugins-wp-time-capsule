@@ -439,7 +439,6 @@ class Wptc_Init{
 			return false;
 		}
 
-
 		if (!isset($post_data['source']) && $post_data['source'] != 'WPTC') {
 			return false;
 		}
@@ -460,6 +459,7 @@ class Wptc_Init{
 		$app_id = wptc_decode_auth_token($post_data['authorization'], 'appId');
 
 		if (empty($app_id) || strlen($app_id) <= 7 ) {
+
 			return false;
 		}
 
@@ -484,6 +484,7 @@ class Wptc_Init{
 		wptc_log($old_hash, '----wptc_hash_check----');
 
 		if(empty($old_hash) || strlen($old_hash) < 10){
+
 			return false;
 		}
 

@@ -930,6 +930,7 @@ if (!function_exists('get_bloginfo')) {
 		return $output;
 	}
 }
+
 if (!function_exists('map_deep')) {
 	function map_deep( $value, $callback ) {
 		if ( is_array( $value ) ) {

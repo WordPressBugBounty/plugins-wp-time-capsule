@@ -313,6 +313,7 @@ class WPTC_Stage_To_Live{
 
 	private function get_hash_by_folders(){
 		wptc_manual_debug('', 'start_get_hash_by_folder_S2L');
+
 		wptc_log('', '---------------get_hash_by_folders-----------------');
 
 		$break = false;
@@ -320,7 +321,9 @@ class WPTC_Stage_To_Live{
 
 		while(!$break){
 			$dir_meta = $this->current_iterator_table->get_unfnished_folder();
+
 			// wptc_log($dir_meta, '--------$dir_meta--------');
+
 			$deep_dirs = false;
 			if (empty($dir_meta) || $dir_meta->offset === -1) {
 				$break = true;
@@ -355,6 +358,7 @@ class WPTC_Stage_To_Live{
 		$file = $iterator->getPathname();
 
 		// wptc_log($file, '---------------process_file-----------------');
+
 		if (!$iterator->isReadable()) {
 			wptc_log($file, '--------iterator process_file not readable--------');
 			return ;
@@ -397,6 +401,7 @@ class WPTC_Stage_To_Live{
 		$is_recursive = ($deep_dirs) ? false : true;
 
 		// wptc_log($path, '---------------get_hash_dir-----------------');
+
 		try{
 			$seek_file_iterator->process_iterator($path, $offset, $is_recursive);
 		} catch(Exception $e){

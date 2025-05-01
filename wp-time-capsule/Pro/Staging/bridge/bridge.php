@@ -1,8 +1,13 @@
 <?php
 
-if (!isset($_REQUEST)) {
-	$this->send_response(array('error' => "Request is missing"));
+if(stripos(__DIR__, 'wp-time-capsule/Pro/Staging/bridge') != false){
+	die('Invalid request.');
 }
+
+if (!isset($_REQUEST)) {
+	die('Request is missing.');
+}
+
 $bridge = new Wptc_Bridge($_REQUEST);
 $bridge->init();
 
@@ -83,8 +88,6 @@ class Wptc_Bridge{
 	}
 
 	private function do_single_upgrades($type, $update_items) {
-		echo $type;
-		print_r($update_items);
 		if ($type == 'plugin') {
 			$return = $this->upgrade_plugin($update_items);
 		} else if ($type == 'theme') {

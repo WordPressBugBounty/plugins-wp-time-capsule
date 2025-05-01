@@ -9,6 +9,10 @@
 * created on 28-06-2017
 */
 
+if(stripos(__DIR__, 'wp-time-capsule/wp-tcapsule-bridge') != false){
+	die('Invalid request.');
+}
+
 #[AllowDynamicProperties]
 class WPTC_Copy{
 	private $common_include_files;

@@ -357,6 +357,7 @@ class WPTC_Replace_DB_Links{
 
 									continue;
 								}
+
 								//Skip table cell if match not found
 								foreach ($list as $item) {
 									if (strpos($edited_data, $item['search']) !== false) {
@@ -411,6 +412,7 @@ class WPTC_Replace_DB_Links{
 							// wptc_log($sql, "--------replacing sql--------");
 
 							$result = $this->wpdb->query($sql);
+
 							if($result === false){
 								wptc_log($this->wpdb->last_error, "--------replacing sql--error------");
 								wptc_log($this->wpdb->last_query, "--------replacing sql--error------");

@@ -3,8 +3,8 @@
 Contributors: dark-prince, amritanandh, WPTimeCapsule
 Tags: backup, staging, migration, backup before update, auto updates.
 Requires at least: 3.9.14
-Tested up to: 6.7
-Stable tag: 1.22.23
+Tested up to: 6.8.1
+Stable tag: 1.22.24
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -101,6 +101,14 @@ Installing WP Time Capsule is simple and easy. Install it like any other WordPre
 7. **Cloning** - Use the meta SQL file from your cloud storage to clone/migrate your site to a new location.
 
 == Changelog ==
+
+= 1.22.24 =
+*Release Date - 1 May 2025*
+
+* Fix : Improved bridge files.
+
+* Improvement : Tested upto WP 6.8.1.
+
 = 1.22.23 =
 *Release Date - 13 Nov 2024*
 
@@ -113,6 +121,7 @@ Installing WP Time Capsule is simple and easy. Install it like any other WordPre
 * Improvement : Manual decrypting of the encrypted DB file feature is improved. Now file extensions are properly checked.
 * Improvement : Improved decoding mechanism.
 * Improvement : Improved activity log for queries.
+
 * Fix : Update in staging did not work in a few cases.
 * Fix : Staging to live failed in a few cases.
 

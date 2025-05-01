@@ -134,7 +134,6 @@ class WPTC_List_Table extends WP_List_Table {
 		if ($this->type === 'others') {
 			return  "SELECT * FROM " . $this->wpdb->base_prefix . "wptc_activity_log WHERE type='others' AND show_user = 1 ";
 		}
-
 		
 		return  $this->wpdb->prepare("SELECT * FROM `". $this->wpdb->base_prefix . "wptc_activity_log` WHERE type=%s AND show_user = 1 GROUP BY action_id", $this->type);
 	}
