@@ -354,7 +354,7 @@ class WPTC_DatabaseBackup {
 				foreach ($table_data as $key => $row) {
 					$data_out = $this->create_row_insert_statement($table, $row, $columns);
 
-					if( $table != $this->database->base_prefix.'wp_options' 
+					if( $table == $this->database->base_prefix.'options' 
 						&& !empty($row['option_name']) ){
 						if( $row['option_name'] == 'itsec_online_files_hashes' 
 							|| stripos($row['option_name'], '_transient_feed_') !== false 
@@ -491,17 +491,38 @@ class WPTC_DatabaseBackup {
 	}
 
 	protected function create_row_insert_statement( $table, array $row, array $columns = array()) {
-		$values = $this->create_row_insert_values($row, $columns);
+		$values = $this->create_row_insert_values($row, $columns, $table);
 		$joined = join(', ', $values);
 		$sql    = "INSERT INTO `$table` VALUES($joined);\n";
 		return $sql;
 	}
 
-	protected function create_row_insert_values($row, $columns) {
+	protected function create_row_insert_values($row, $columns, $table) {
 		$values = array();
+		$prev_col_val = '';
+
+		// wptc_log($table, "----table----");
 
 		foreach ($row as $columnName => $value) {
 			$type = $columns[$columnName]->Type;
+
+			if($table == $this->database->base_prefix.'options'){
+				// wptc_log($columnName, "----columnName----");
+				// wptc_log($prev_col_val, "----prev_col_val----");
+	
+				if($prev_col_val == 'wphb_scripts_collection'){
+					$values[] = $this->quote_and_esc_sql('');
+	
+					$prev_col_val = '';
+	
+					continue;
+				}
+	
+				if($columnName == 'option_name'){
+					$prev_col_val = $value;
+				}
+			}
+
 			// If it should not be enclosed
 			if ($value === null) {
 				$values[] = 'null';

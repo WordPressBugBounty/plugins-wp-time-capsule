@@ -3,8 +3,8 @@
 Contributors: dark-prince, amritanandh, WPTimeCapsule
 Tags: backup, staging, migration, backup before update, auto updates.
 Requires at least: 3.9.14
-Tested up to: 6.8.1
-Stable tag: 1.22.24
+Tested up to: 6.8.2
+Stable tag: 1.22.25
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -101,6 +101,14 @@ Installing WP Time Capsule is simple and easy. Install it like any other WordPre
 7. **Cloning** - Use the meta SQL file from your cloud storage to clone/migrate your site to a new location.
 
 == Changelog ==
+
+= 1.22.25 =
+*Release Date - 22 Sep 2025*
+
+* Fix: DB backup failed in a few cases when the Hummingbird plugin is active.
+
+* Improvement: Added new bucket regions in Wasabi and Backblaze.
+* Improvement: Tested upto WP 6.8.2.
 
 = 1.22.24 =
 *Release Date - 1 May 2025*

@@ -52,8 +52,6 @@ try {
 
 	$tcStartBackupNow = false;
 
-	$fresh = $initial_setup->is_fresh_backup();
-
 	$disable_backup_now = $config->get_option('in_progress');
 
 	if (isset($_GET['new_backup'])) {

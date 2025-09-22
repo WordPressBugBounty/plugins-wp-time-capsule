@@ -260,17 +260,26 @@ class Wptc_InitialSetup extends Wptc_InitialSetup_Init {
 				'us-west-003'      => 'US West (us-west-003)',
 				'us-west-004'      => 'US West (us-west-004)',
 				'us-west-005'      => 'US West (us-west-005)',
+				'us-west-006'      => 'US West (us-west-006)',
 				'eu-central-001'      => 'EU Central (eu-central-001)',
 				'eu-central-002'      => 'EU Central (eu-central-002)',
 				'eu-central-003'      => 'EU Central (eu-central-003)',
 				'eu-central-004'      => 'EU Central (eu-central-004)',
 				'eu-central-005'      => 'EU Central (eu-central-005)',
+				'eu-central-006'      => 'EU Central (eu-central-006)',
 				'us-east-000'      => 'US East (us-east-000)',
 				'us-east-001'      => 'US East (us-east-001)',
 				'us-east-002'      => 'US East (us-east-002)',
 				'us-east-003'      => 'US East (us-east-003)',
 				'us-east-004'      => 'US East (us-east-004)',
 				'us-east-005'      => 'US East (us-east-005)',
+				'us-east-006'      => 'US East (us-east-006)',
+				'ca-east-001'      => 'Canada (ca-east-001)',
+				'ca-east-002'      => 'Canada (ca-east-002)',
+				'ca-east-003'      => 'Canada (ca-east-003)',
+				'ca-east-004'      => 'Canada (ca-east-004)',
+				'ca-east-005'      => 'Canada (ca-east-005)',
+				'ca-east-006'      => 'Canada (ca-east-006)',
 			);
 
 		$div = '<select name="backblaze_bucket_region" id="backblaze_bucket_region" class="wptc_general_inputs" style="width:45%; height: 38px;">';
@@ -322,6 +331,8 @@ class Wptc_InitialSetup extends Wptc_InitialSetup_Init {
 				'eu-central-2'      => 'EU Central 2 (Frankfruit)',
 				'eu-west-1'      => 'EU West 1 (London)',
 				'eu-west-2'      => 'EU West 2 (Paris)',
+				'eu-west-3'      => 'United Kingdom West 3',
+				'eu-south-1'      => 'EU South 1 (Milan)',
 				'ap-northeast-1'      => 'AP NorthEast 1 (Tokyo)',
 				'ap-northeast-2'      => 'AP NorthEast 2 (Osaka)',
 				'ca-central-1'      => 'CA Central 1 (Toronto)',
@@ -766,12 +777,6 @@ class Wptc_InitialSetup extends Wptc_InitialSetup_Init {
 		}
 	
 		return $div;
-	}
-
-	public function is_fresh_backup(){
-		global $wpdb;
-		$fcount = $wpdb->get_results('SELECT COUNT(*) as files FROM ' . $wpdb->base_prefix . 'wptc_processed_files');
-		return (!empty($fcount) && !empty($fcount[0]->files) && $fcount[0]->files > 0) ? 'yes' : 'no';
 	}
 
 }
