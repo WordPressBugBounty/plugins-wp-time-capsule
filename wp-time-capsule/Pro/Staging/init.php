@@ -725,7 +725,7 @@ class Wptc_Staging extends WPTC_Privileges {
 		$size = filesize($live_file);
 
 		if ($size > WPTC_STAGING_COPY_SIZE) {
-			wptc_log(array(), '--------large file--------');
+			wptc_log($live_file, '--------large file--------');
 			$copy_status = wptc_copy_large_file($live_file, $staging_file);
 		} else {
 			$copy_status = $this->filesystem->copy($live_file, $staging_file, true, FS_CHMOD_FILE);

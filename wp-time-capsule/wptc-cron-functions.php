@@ -255,6 +255,13 @@ class Wptc_Init{
 	private function process_bulk_initial_setup() {
 		wptc_log($this->bulk_setup_needed_post_data, "-----bulk---INITIAL_SETUP---call from node-----");
 
+		$can_proceed_with_bulk_add = WPTC_Factory::get('config')->get_option('can_proceed_with_bulk_add');
+
+		if(empty($can_proceed_with_bulk_add)){
+			send_bulk_setup_status_to_server('Bulk setup is not allowed to proceed. Please allow to proceed from plugin settings.');
+			wptc_json_format_bulk_exit_response('Bulk setup is not allowed to proceed. Contact us at help@wptimecapsule.com if you want to proceed with bulk setup.');
+		}
+
 		update_bulk_settings_default_flags_wptc($this->bulk_setup_needed_post_data);
 		login_request_for_bulk_support_wptc($this->bulk_setup_needed_post_data);
 
