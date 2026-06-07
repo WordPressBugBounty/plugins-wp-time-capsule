@@ -4,7 +4,7 @@ Plugin Name: Backup and Staging by WP Time Capsule
 Plugin URI: https://wptimecapsule.com
 Description: Backup and Staging by WP Time Capsule is an incremental schedule backup plugin that backups up your website to Dropbox, Google Drive, Amazon S3, etc.
 Author: Revmakx
-Version: 1.22.26
+Version: 1.22.27
 Author URI: http://www.revmakx.com
 Tested up to: 6.9.4
 License:           GPL-2.0+
@@ -3687,7 +3687,9 @@ function decrypt_file_wptc(){
 
 	WPTC_Factory::get('config')->set_option('recent_decrypted_file', $result['fullpath']);
 
-	$result['message'] = "Decryption Completed. <a href=" . network_admin_url() . "?page=wp-time-capsule-settings&download=1#wp-time-capsule-tab-advanced>Download your file here</a>. After downloaded <a href='#' id='wptc-clear-all-decrypt-files'>click here</a> to delete the file for security reason.";
+	$wptc_download_decrypt_nonce = wp_create_nonce( 'download_decrypt' );
+
+	$result['message'] = "Decryption Completed. <a href=" . network_admin_url() . "?page=wp-time-capsule-settings&download=1&wptc_download_decrypt_nonce=" . $wptc_download_decrypt_nonce . "#wp-time-capsule-tab-advanced>Download your file here</a>. After downloaded <a href='#' id='wptc-clear-all-decrypt-files'>click here</a> to delete the file for security reason.";
 
 	wptc_die_with_json_encode($result);
 }
@@ -3765,6 +3767,14 @@ function download_recent_decrypted_file_wptc(){
 
 	if (empty($_GET) || empty($_GET['page']) || empty($_GET['download']) || $_GET['page'] != 'wp-time-capsule-settings' || $_GET['download'] != 1) {
 		return ;
+	}
+
+	if (! isset( $_GET['wptc_download_decrypt_nonce'] ) || ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_GET['wptc_download_decrypt_nonce'] ) ), 'download_decrypt' ) ) {
+		return;
+	}
+
+	if(!is_user_logged_in() || !current_user_can('manage_options')){
+		return;
 	}
 
 	$wptc_file_path = WPTC_Factory::get('config')->get_option('recent_decrypted_file');
