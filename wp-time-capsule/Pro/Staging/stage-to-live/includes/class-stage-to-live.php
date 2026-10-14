@@ -41,6 +41,9 @@ class WPTC_Stage_To_Live{
 	}
 
 	public function to_live(){
+		if(!current_user_can('manage_options')){
+			$this->app_functions->die_with_json_encode( array('status' => 'error' , 'msg' => 'You are not authorized to access this page.') );
+		}
 		$this->app_functions->set_start_time();
 		$this->choose_action();
 	}

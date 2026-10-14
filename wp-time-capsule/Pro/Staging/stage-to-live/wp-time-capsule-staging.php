@@ -6,7 +6,7 @@ Description: WP Time Capsule Staging plugin.
 Author: Revmakx
 Version: 1.0.0
 Author URI: http://www.revmakx.com
-Tested up to: 5.9.3
+Tested up to: 7.1.3
 /************************************************************
  * This plugin was modified by Revmakx
  * Copyright (c) 2017 Revmakx

@@ -108,6 +108,16 @@ class WPTC_Bridge_Core {
 		$this->load_footer();
 	}
 
+	private function temp_sanitize_text_input($input) {
+		if (!is_string($input)) {
+
+			return '';
+		}
+		$input = trim($input);
+
+		return preg_replace('/[^\p{L}\p{N} _.-]/u', '', $input);
+	}
+
 	private function show_points() {
 		global $wpdb;
 		if (empty($_POST)) {
@@ -120,6 +130,7 @@ class WPTC_Bridge_Core {
 			$response = $this->create_config_file($db_info);
 		} else {
 			$wpdb = new wpdb($_POST['db_username'], $_POST['db_password'], $_POST['db_name'], $_POST['db_host']);
+			$_POST['db_prefix'] = $this->temp_sanitize_text_input($_POST['db_prefix']);
 			$wpdb->base_prefix = $_POST['db_prefix'];
 			$response = $this->create_config_file($_POST);
 		}
